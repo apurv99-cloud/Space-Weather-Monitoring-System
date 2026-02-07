@@ -78,5 +78,23 @@ src/main/java
 }
 
 
+Alert Level Logic
 
+The alert level is evaluated based on the following rules:
+
+SEVERE
+
+Kp Index ≥ 7
+
+Radiation Level ≥ 8
+
+WARNING
+
+Kp Index ≥ 5
+
+Solar Wind Speed > 700 km/s
+
+NORMAL
+
+All other conditions
 
