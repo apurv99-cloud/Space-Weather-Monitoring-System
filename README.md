@@ -1,119 +1,162 @@
-# Space Weather Monitoring System (Backend)
 
-A Spring Boot–based backend application designed to simulate a **Space Weather Monitoring System**.  
-The project focuses on collecting, storing, and analyzing space weather parameters such as solar wind speed, radiation levels, geomagnetic activity (Kp Index), and CME probability.
 
-This application is built as a **backend-only system**, following clean architecture and industry practices.  
-It is intended to be extended later with authentication, authorization, and a web/UI layer.
+#  Space Weather Monitoring System (Backend)
+
+A **Spring Boot–based real-time backend system** designed to simulate a **Space Weather Monitoring System**.
+
+This project collects **live space weather data from NOAA APIs**, processes it using alert evaluation logic, stores it in a database, and pushes **real-time alerts using WebSockets**.
 
 ---
 
 ##  Project Overview
 
-Space weather events such as **solar flares**, **coronal mass ejections (CMEs)**, and **geomagnetic storms** can affect satellites, communication systems, navigation, and power grids.
+Space weather events such as **solar flares**, **coronal mass ejections (CMEs)**, and **geomagnetic storms** can impact:
 
-This project simulates how a backend system:
-- Receives space weather data
-- Stores it in a relational database
-- Evaluates alert levels based on scientific thresholds
-- Exposes REST APIs for consumption by future web or mobile applications
+- Satellites 
+- Communication systems 
+- GPS navigation   
+- Power grids   
 
----
+This system simulates how a **real-world backend**:
 
-## Key Features
-
-- RESTful APIs using Spring Boot
-- Domain-based data modeling
-- PostgreSQL database integration
-- Automatic table creation using Hibernate
-- Alert-level evaluation logic
-- Layered architecture (Controller, Service, Repository)
-- Easily extensible for Spring Security and frontend integration
+- Fetches real-time data from external APIs (NOAA)
+- Processes and evaluates alert levels
+- Stores data in a relational database
+- Pushes **live alerts using WebSockets**
+- Exposes REST APIs for frontend consumption
 
 ---
 
-## Alert Level Logic
+##  Key Features
 
-The alert level is evaluated based on the following rules:
-
-SEVERE
-
-Kp Index ≥ 7
-
-Radiation Level ≥ 8
-
-WARNING
-
-Kp Index ≥ 5
-
-Solar Wind Speed > 700 km/s
-
-NORMAL
+- **Real-time data integration (NOAA APIs)**
+-  **WebSocket-based live alert system**
+-  **Scheduled data fetching (auto-ingestion)**
+-  Domain-based data modeling
+-  PostgreSQL database integration
+- Automatic table creation (Hibernate)
+-  Alert-level evaluation engine
+-  Layered architecture (Controller, Service, Repository)
+-  Ready for Spring Security & frontend integration
 
 ---
 
-### Why This Project Matters
+##  Real-Time Flow
+Scheduler → NOAA API → DTO → Service Layer → DB
+↓
+WebSocket Alerts
+↓
+Frontend (Live)
+
+
+---
+
+##  Alert Level Logic
+
+###  SEVERE
+- Kp Index ≥ 7  
+- Radiation Level ≥ 8  
+
+###  WARNING
+- Kp Index ≥ 5  
+- Solar Wind Speed > 700 km/s  
+
+###  NORMAL
+- All other cases  
+
+---
+
+##  External APIs Used (NOAA)
+
+- Kp Index → `planetary_k_index_1m.json`
+- Solar Wind → `plasma-1-hour.json`
+- Radiation → `xrays-6-hour.json`
+
+---
+
+##  Why This Project Matters
 
 This project demonstrates:
 
-Strong backend fundamentals
-
-Database-driven application design
-
-Real-world domain modeling
-
-Clean separation of concerns
-
-Readiness for enterprise-level extensions
+- Real-time backend system design  
+- External API integration (multi-source data aggregation)  
+- Event-driven architecture using WebSockets  
+- Clean separation of concerns  
+- Scalable and extensible backend design  
 
 ---
 
-## Tech Stack
+##  Tech Stack
 
 - **Java**
 - **Spring Boot**
-- **Spring Web (REST APIs)**
+- **Spring Web**
 - **Spring Data JPA**
+- **Spring WebSocket**
 - **Hibernate**
 - **PostgreSQL**
 - **Maven**
-- **Postman** (for API testing)
+- **Postman**
 
 ---
 
-## Project Architecture
-
+##  Project Architecture
 src/main/java
 └── com.spaceweather.demo
 ├── controller
-│ └── WeatherController.java
+│ └── SpaceWeatherController.java
 ├── service
-│ └── WeatherService.java
+│ ├── WeatherService.java
+│ ├── NOAAService.java
+│ └── AlertWebSocketService.java
 ├── repository
 │ └── WeatherRepository.java
-└── model
-└── WeatherData.java
+├── model
+│ └── WeatherData.java
+├── dto
+│ └── SpaceWeatherDTO.java
+├── scheduler
+│ └── WeatherScheduler.java
+└── config
+└── WebSocketConfig.java
+
 
 ---
 
-##  API Endpoints
+##  REST API Endpoints
 
-### ➤ Add Weather Data
+### ➤ Fetch & Process Data (Manual Trigger)
 **POST**
+/api/weather/fetch
+---
 
-/api/weather/add
+### ➤ Get Latest Data
+**GET**
+/api/weather/latest
+---
 
-### Request Body (JSON)
+### ➤ Get Severe Alerts
+**GET**
+/api/weather/alerts/severe
+---
+
+##  WebSocket Endpoint
+
+### Connection Endpoint:
+/ws
+
+### Subscribe to Alerts:
+/topic/alerts
+
+### Sample Payload:
 ```json
 {
-  "solarSpeedOfWind": 820,
-  "levelOfRadiation": 7.1,
-  "kpIndex": 6,
-  "cmeProbability": 0.5,
-  "source": "L1"
+  "message": " Severe Space Weather Detected!",
+  "level": "SEVERE",
+  "kpIndex": 8.2,
+  "solarWind": 780,
+  "radiation": 9.1,
+  "time": "2026-05-05T12:30:00"
 }
-
-
-
 
 
