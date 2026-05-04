@@ -1,12 +1,14 @@
 package com.spaceweather.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spaceweather.demo.model.WeatherData;
 
 public interface WeatherRepository extends JpaRepository<WeatherData, Long> {
 
-    WeatherData findTopByOrderByTimeStampDesc();
-}
+    List<WeatherData> findTop10ByOrderByTimestampDesc();
 
-// This single line replaces: JDBC, ResultSet, manual mapping, HQL
+    List<WeatherData> findByAlertLevel(String alertLevel);
+}
