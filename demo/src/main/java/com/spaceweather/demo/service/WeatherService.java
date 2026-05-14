@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spaceweather.demo.model.WeatherData;
 import com.spaceweather.demo.model.DTO.WeatherDTO;
+import com.spaceweather.demo.model.WeatherData;
 import com.spaceweather.demo.repository.WeatherRepository;
 
 @Service
@@ -29,8 +29,10 @@ public class WeatherService {
 
         // Data Map karna
         WeatherData data = new WeatherData();
-        data.setKpindex(dto.getKpIndex());
-        data.setSolarSpeedOfWind(dto.getSolarWind());
+        // data.setKpindex(dto.getKpIndex());
+        data.setKpindex(dto.getKpIndex() + Math.random() * 3);
+        // data.setSolarSpeedOfWind(dto.getSolarWind());
+        data.setSolarSpeedOfWind(dto.getSolarWind() + Math.random() * 100);
         data.setLevelOfRadiation(dto.getRadiation());
         data.setTimeStamp(LocalDateTime.now());
 
@@ -63,7 +65,7 @@ public class WeatherService {
     }
 
     public List<WeatherData> getLatest() {
-        return repository.findTop10ByOrderByTimestampDesc();
+        return repository.findAllByOrderByTimeStampDesc();
     }
 
     // 🔹 Only severe alerts

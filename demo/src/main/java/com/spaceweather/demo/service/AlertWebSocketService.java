@@ -19,6 +19,7 @@ public class AlertWebSocketService {
     public void sendAlert(WeatherData data) {
 
         Map<String, Object> payload = new HashMap<>();
+
         payload.put("message", "🚨 Severe Space Weather Detected!");
         payload.put("level", data.getAlertLevel());
         payload.put("kpIndex", data.getKpindex());
@@ -26,6 +27,6 @@ public class AlertWebSocketService {
         payload.put("radiation", data.getLevelOfRadiation());
         payload.put("time", data.getTimeStamp());
 
-        messagingTemplate.convertAndSend("/topic/alerts", data);
+        messagingTemplate.convertAndSend("/topic/alerts", (Object)payload);
     }
 }

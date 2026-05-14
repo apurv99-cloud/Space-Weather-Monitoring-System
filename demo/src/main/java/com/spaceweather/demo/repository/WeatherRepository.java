@@ -8,7 +8,7 @@ import com.spaceweather.demo.model.WeatherData;
 
 public interface WeatherRepository extends JpaRepository<WeatherData, Long> {
 
-    List<WeatherData> findTop10ByOrderByTimestampDesc();
+    List<WeatherData> findAllByOrderByTimeStampDesc();
 
     List<WeatherData> findByAlertLevel(String alertLevel);
 }

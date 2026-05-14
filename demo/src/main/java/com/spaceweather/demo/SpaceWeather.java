@@ -2,12 +2,14 @@ package com.spaceweather.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class SpaceWeathw {
+@EnableScheduling
+public class SpaceWeather {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpaceWeathw.class, args);
+		SpringApplication.run(SpaceWeather.class, args);
 	}
 
 }

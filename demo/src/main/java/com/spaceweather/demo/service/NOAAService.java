@@ -13,7 +13,7 @@ public class NOAAService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // 🔹 MAIN METHOD (sab kuch yahin se aayega)
+    // MAIN METHOD (sab kuch yahin se aayega)
     public WeatherDTO fetchAllData() {
 
         double kp = fetchKpIndex();
@@ -23,7 +23,6 @@ public class NOAAService {
         return new WeatherDTO(kp, solarWind, radiation);
     }
 
-    
     private double fetchKpIndex() {
 
         String url = "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json";
@@ -38,10 +37,9 @@ public class NOAAService {
         return 0.0;
     }
 
-    
     private double fetchSolarWindSpeed() {
 
-        String url = "https://services.swpc.noaa.gov/products/solar-wind/plasma-1-hour.json";
+        String url = "https://services.swpc.noaa.gov/products/solar-wind/plasma-6-hour.json";
 
         List<List<Object>> response = restTemplate.getForObject(url, List.class);
 
@@ -55,20 +53,33 @@ public class NOAAService {
         return 0.0;
     }
 
-  
-    private double fetchRadiationLevel() {
+    public double fetchRadiationLevel() {
 
-        String url = "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json";
+        try {
 
-        List<Map<String, Object>> response = restTemplate.getForObject(url, List.class);
+            String url = "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json";
 
-        if (response != null && !response.isEmpty()) {
+            RestTemplate restTemplate = new RestTemplate();
+
+            List<Map<String, Object>> response = restTemplate.getForObject(url, List.class);
+
+            if (response == null || response.isEmpty()) {
+                return 0.0;
+            }
+
             Map<String, Object> latest = response.get(response.size() - 1);
 
-            // "flux" = radiation intensity
-            return Double.parseDouble(latest.get("flux").toString());
-        }
+            Object flux = latest.get("flux");
 
-        return 0.0;
+            return flux != null
+                    ? Double.parseDouble(flux.toString())
+                    : 0.0;
+
+        } catch (Exception e) {
+
+            System.out.println("Radiation API failed.");
+
+            return 0.0;
+        }
     }
 }
