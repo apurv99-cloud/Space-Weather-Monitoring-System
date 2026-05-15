@@ -65,7 +65,7 @@ Monitored parameters include:
 
 ---
 
-# 📡 Live WebSocket Communication
+#  Live WebSocket Communication
 
 The system uses:
 - Spring WebSocket
@@ -368,4 +368,4 @@ Passionate about:
 
 If you found this project interesting, consider giving it a ⭐ on GitHub.
 
-It helps the project grow and motivates future improvements 🚀
+It helps the project grow and motivates future improvements 
