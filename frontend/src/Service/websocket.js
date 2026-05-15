@@ -4,7 +4,7 @@ let stompClient = null;
 
 export const connectWebSocket = (onMessageReceived) => {
   stompClient = new Client({
-    brokerURL: "ws://localhost:8080/ws",
+    brokerURL: "wss://space-weather-monitoring-system-2.onrender.com/ws",
 
     reconnectDelay: 5000,
 

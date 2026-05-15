@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api/weather",
+  baseURL: "https://space-weather-monitoring-system-2.onrender.com/api/weather",
 });
 
 export const getLatestWeather = async () => {
