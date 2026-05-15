@@ -47,13 +47,30 @@ export default function EarthVisulise() {
           </div>
 
           {/* GLOBE */}
-          <div className="h-[500px] w-full flex justify-center">
+          {/* GLOBE */}
+          <div className="h-[300px] sm:h-[400px] lg:h-[500px] w-full flex justify-center items-center">
             <Globe
               globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
               backgroundColor="rgba(0,0,0,0)"
               animateIn={true}
-              width={500}
-              height={500}
+              width={
+                typeof window !== "undefined"
+                  ? window.innerWidth < 640
+                    ? 300
+                    : window.innerWidth < 1024
+                      ? 400
+                      : 500
+                  : 500
+              }
+              height={
+                typeof window !== "undefined"
+                  ? window.innerWidth < 640
+                    ? 300
+                    : window.innerWidth < 1024
+                      ? 400
+                      : 500
+                  : 500
+              }
             />
           </div>
         </div>

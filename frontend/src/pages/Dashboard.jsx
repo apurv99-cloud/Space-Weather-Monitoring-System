@@ -555,7 +555,7 @@ export default function Dashboard() {
                     <p className="text-slate-500">Kp Index</p>
 
                     <p className="text-cyan-400 text-lg font-bold">
-                      {item.kpindex}
+                      {item.kpindex?.toFixed(1)}
                     </p>
                   </div>
 
@@ -563,7 +563,7 @@ export default function Dashboard() {
                     <p className="text-slate-500">Solar Wind</p>
 
                     <p className="text-blue-400 text-lg font-bold">
-                      {item.solarSpeedOfWind}
+                      {item.solarSpeedOfWind?.toFixed(1)}
                     </p>
                   </div>
                 </div>
