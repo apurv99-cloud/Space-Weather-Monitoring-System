@@ -1,149 +1,172 @@
-#  Space Weather Monitoring System
 
-A futuristic **real-time Space Weather Intelligence Platform** built using **Spring Boot, React, WebSockets, NOAA APIs, and PostgreSQL/MySQL**.
 
-This system continuously tracks live space weather conditions such as:
+#  Project Overview
 
-- Geomagnetic storms
-- Solar wind activity
-- Radiation anomalies
-- Kp Index fluctuations
+The **Space Weather Monitoring System** is a real-time monitoring platform designed to simulate how modern scientific intelligence systems process and broadcast space weather events.
 
-and visualizes them through a **modern real-time analytics dashboard** with live WebSocket updates and historical trend analysis.
+The system continuously fetches data from live NOAA APIs, evaluates risk conditions, stores historical records, and broadcasts updates to connected clients through WebSockets.
+
+This project demonstrates:
+- Real-time backend systems
+- Event-driven architecture
+- Full-stack integration
+- Live analytics dashboards
+- Production deployment workflows
+- Containerized DevOps infrastructure
+
+---
+#  Live Deployment
+
+##  Frontend (Vercel)
+
+### Public Working URL
+
+https://space-weather-monitoring-system.vercel.app
 
 ---
 
-#  Project Vision
+##  Backend API (Render)
 
-Space weather events can severely impact:
+### Public Working URL
 
-- Satellites
-- GPS navigation
-- Aviation communication
-- Radio systems
-- Power grids
-- Military infrastructure
-
-This project simulates how modern monitoring systems process and broadcast real-time scientific data using an **event-driven architecture**.
+https://space-weather-monitoring-system-2.onrender.com
 
 ---
 
-#  Features
+#  Why Space Weather Matters
 
-##  Real-Time Monitoring
-Continuously fetches live NOAA space-weather data at scheduled intervals.
+Space weather events can severely affect:
+
+-  Satellites
+-  Radio communication
+-  Aviation systems
+-  GPS navigation
+-  Power grids
+-  Military infrastructure
+-  Communication systems
+
+Modern governments and scientific agencies actively monitor these events.
+
+This project simulates such monitoring infrastructure using modern software engineering practices.
 
 ---
 
-##  Live WebSocket Alerts
-Pushes instant alerts to the frontend whenever severe space weather conditions are detected.
+#  Core Features
 
-No page refresh required.
+#  Real-Time Monitoring Engine
+
+The backend continuously fetches live NOAA data using scheduled jobs.
+
+Monitored parameters include:
+- Kp Index
+- Solar wind speed
+- Radiation intensity
+- Geomagnetic activity
 
 ---
 
-##  Interactive Analytics Dashboard
-Modern dashboard with:
+# 📡 Live WebSocket Communication
 
-- Real-time metrics
-- Kp Index trend graphs
+The system uses:
+- Spring WebSocket
+- STOMP Protocol
+
+to instantly push severe alerts to all connected frontend clients.
+
+No manual refresh required.
+
+---
+
+#  Advanced Analytics Dashboard
+
+The React dashboard provides:
+
+- Real-time monitoring cards
+- Kp Index trend visualization
 - Solar wind activity charts
+- Alert severity analytics
 - Historical activity feed
-- Alert distribution analytics
+- Animated statistics
+- Live updating components
 
 ---
 
-##  Futuristic UI
-Built with:
+#  Futuristic User Interface
 
+Designed using:
 - TailwindCSS
 - Framer Motion
 - Recharts
-- Animated Earth visualization
+- React Globe
 - Glassmorphism effects
-- Neon cyber-style dashboard
+- Neon cyber aesthetics
+
+The UI simulates a futuristic mission-control dashboard.
 
 ---
 
-##  Alert Evaluation Engine
+#  Alert Evaluation Engine
 
-Automatically classifies events into:
+The backend automatically classifies events into:
 
-###  SEVERE
+---
+
+##  SEVERE
+
+Conditions:
 - Kp Index ≥ 7
 - Radiation Level ≥ 8
 
-###  WARNING
+---
+
+##  WARNING
+
+Conditions:
 - Kp Index ≥ 5
 - Solar Wind Speed > 700 km/s
 
-###  NORMAL
-- Stable space conditions
+---
+
+##  NORMAL
+
+Conditions:
+- Stable space weather environment
 
 ---
 
-##  NOAA API Integration
+#  NOAA API Integration
 
-Integrated multiple real-time NOAA APIs:
+Integrated live APIs from NOAA Space Weather Services.
 
+Data Sources:
 - Kp Index API
 - Solar Wind Plasma API
 - X-Ray Radiation API
 
 ---
 
-##  Historical Data Tracking
+#  Historical Data Tracking
 
-Stores historical records inside the database for:
+All incoming weather records are stored inside PostgreSQL.
 
-- Trend analysis
-- Chart visualization
-- Future ML prediction models
-
----
-
-##  Event-Driven Architecture
-
-Backend automatically:
-
-1. Fetches live data
-2. Processes alerts
-3. Stores records
-4. Broadcasts events
-5. Updates frontend in real-time
+Used for:
+- Historical analysis
+- Graph visualization
+- Future machine learning integration
+- Trend monitoring
 
 ---
 
-#  Tech Stack
+#  Event-Driven System Workflow
 
-## Backend
-- Java
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- Spring WebSocket
-- Hibernate
-- Maven
+The backend automatically performs:
 
----
-
-## Frontend
-- React
-- TailwindCSS
-- Recharts
-- Framer Motion
-- React Icons
-- CountUp.js
-
----
-
-## Database
-- PostgreSQL / MySQL
-
----
-
-## APIs
-- NOAA Space Weather APIs
+1. Fetch live NOAA data
+2. Process incoming metrics
+3. Evaluate threat levels
+4. Store records in PostgreSQL
+5. Broadcast WebSocket events
+6. Update frontend dashboard
 
 ---
 
@@ -158,9 +181,191 @@ NOAA Service Layer
      ↓
 Alert Evaluation Engine
      ↓
-Database Storage
+PostgreSQL Database
      ↓
 WebSocket Broadcasting
      ↓
 React Dashboard (Live Updates)
+```
 
+---
+
+#  Dockerized Infrastructure
+
+The complete system is fully containerized using Docker.
+
+Containers include:
+
+- Spring Boot Backend
+- React + Nginx Frontend
+- PostgreSQL Database
+
+Orchestrated using:
+- Docker Compose
+
+---
+
+#  Tech Stack
+
+# Backend
+
+- Java 21
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Spring WebSocket
+- Hibernate
+- Maven
+
+---
+
+# Frontend
+
+- React
+- Vite
+- TailwindCSS
+- Recharts
+- Framer Motion
+- React Globe
+- Axios
+- React Icons
+
+---
+
+# Database
+
+- PostgreSQL
+
+---
+
+# DevOps & Deployment
+
+- Docker
+- Docker Compose
+- Nginx
+- Render
+- Vercel
+
+---
+
+# APIs
+
+- NOAA Space Weather APIs
+
+---
+
+#  Project Structure
+
+```text
+Space-Weather-Monitoring-System
+│
+├── demo/                         # Spring Boot Backend
+│
+├── frontend/Space/               # React Frontend
+│
+├── docker-compose.yml
+│
+├── nginx.conf
+│
+└── README.md
+```
+
+---
+
+#  Running Locally With Docker
+
+# 1️ Clone Repository
+
+```bash
+git clone https://github.com/your-username/Space-Weather-Monitoring-System.git
+```
+
+---
+
+#  Navigate Into Project
+
+```bash
+cd Space-Weather-Monitoring-System
+```
+
+---
+
+# 3️ Run Docker Containers
+
+```bash
+docker compose up --build
+```
+
+---
+
+#  Local Services
+
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:3000 |
+| Backend | http://localhost:8080 |
+| PostgreSQL | localhost:5432 |
+
+---
+
+#  Key Engineering Concepts Used
+
+- Event-Driven Architecture
+- Real-Time Systems
+- REST APIs
+- WebSockets
+- Containerization
+- Database Persistence
+- Frontend State Management
+- Production Deployment
+- Microservice-style Communication
+
+---
+
+#  Challenges Solved
+
+- Real-time WebSocket broadcasting
+- Cross-origin communication (CORS)
+- Docker multi-container orchestration
+- Frontend-backend synchronization
+- Cloud deployment configuration
+- Environment variable management
+- PostgreSQL cloud integration
+- Production-ready builds
+
+---
+
+#  Future Improvements
+
+Planned upgrades include:
+
+-  AI-based prediction models
+-  Kubernetes deployment
+-  Kafka event streaming
+-  Redis caching
+-  Authentication & Authorization
+-  Fully optimized mobile UI
+-  Advanced observability dashboards
+-  Machine learning anomaly detection
+-  CI/CD pipelines
+
+---
+
+#  Author
+
+# Apurv Sinha
+
+Passionate about:
+- Backend Engineering
+- Real-Time Systems
+- Scalable Architectures
+- DevOps
+- Futuristic Software Products
+
+---
+
+# ⭐ Support
+
+If you found this project interesting, consider giving it a ⭐ on GitHub.
+
+It helps the project grow and motivates future improvements 🚀
