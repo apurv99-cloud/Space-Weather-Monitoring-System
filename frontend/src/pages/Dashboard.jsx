@@ -40,9 +40,13 @@ export default function Dashboard() {
   const [lastUpdated, setLastUpdated] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (retries = 10) => {
       try {
         const data = await getLatestWeather();
+
+        if (!data || data.length === 0) {
+          throw new Error("No data received");
+        }
 
         setHistory(data);
 
@@ -50,7 +54,13 @@ export default function Dashboard() {
 
         setLastUpdated(new Date().toLocaleTimeString());
       } catch (error) {
-        console.error(error);
+        console.error("Backend waking up...", error);
+
+        if (retries > 0) {
+          setTimeout(() => {
+            fetchData(retries - 1);
+          }, 5000);
+        }
       }
     };
 
@@ -87,7 +97,13 @@ export default function Dashboard() {
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
 
-          <h2 className="text-2xl font-bold">Initializing Space Systems...</h2>
+          <h2 className="text-2xl font-bold">
+            Waking Space Weather Servers...
+          </h2>
+
+          <p className="text-slate-400 mt-4">
+            Free hosting may take up to 30 seconds.
+          </p>
         </div>
       </div>
     );
