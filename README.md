@@ -1,162 +1,166 @@
+#  Space Weather Monitoring System
 
+A futuristic **real-time Space Weather Intelligence Platform** built using **Spring Boot, React, WebSockets, NOAA APIs, and PostgreSQL/MySQL**.
 
-#  Space Weather Monitoring System (Backend)
+This system continuously tracks live space weather conditions such as:
 
-A **Spring Boot–based real-time backend system** designed to simulate a **Space Weather Monitoring System**.
+- Geomagnetic storms
+- Solar wind activity
+- Radiation anomalies
+- Kp Index fluctuations
 
-This project collects **live space weather data from NOAA APIs**, processes it using alert evaluation logic, stores it in a database, and pushes **real-time alerts using WebSockets**.
-
----
-
-##  Project Overview
-
-Space weather events such as **solar flares**, **coronal mass ejections (CMEs)**, and **geomagnetic storms** can impact:
-
-- Satellites 
-- Communication systems 
-- GPS navigation   
-- Power grids   
-
-This system simulates how a **real-world backend**:
-
-- Fetches real-time data from external APIs (NOAA)
-- Processes and evaluates alert levels
-- Stores data in a relational database
-- Pushes **live alerts using WebSockets**
-- Exposes REST APIs for frontend consumption
+and visualizes them through a **modern real-time analytics dashboard** with live WebSocket updates and historical trend analysis.
 
 ---
 
-##  Key Features
+#  Project Vision
 
-- **Real-time data integration (NOAA APIs)**
--  **WebSocket-based live alert system**
--  **Scheduled data fetching (auto-ingestion)**
--  Domain-based data modeling
--  PostgreSQL database integration
-- Automatic table creation (Hibernate)
--  Alert-level evaluation engine
--  Layered architecture (Controller, Service, Repository)
--  Ready for Spring Security & frontend integration
+Space weather events can severely impact:
 
----
+- Satellites
+- GPS navigation
+- Aviation communication
+- Radio systems
+- Power grids
+- Military infrastructure
 
-##  Real-Time Flow
-Scheduler → NOAA API → DTO → Service Layer → DB
-↓
-WebSocket Alerts
-↓
-Frontend (Live)
-
+This project simulates how modern monitoring systems process and broadcast real-time scientific data using an **event-driven architecture**.
 
 ---
 
-##  Alert Level Logic
+#  Features
+
+##  Real-Time Monitoring
+Continuously fetches live NOAA space-weather data at scheduled intervals.
+
+---
+
+##  Live WebSocket Alerts
+Pushes instant alerts to the frontend whenever severe space weather conditions are detected.
+
+No page refresh required.
+
+---
+
+##  Interactive Analytics Dashboard
+Modern dashboard with:
+
+- Real-time metrics
+- Kp Index trend graphs
+- Solar wind activity charts
+- Historical activity feed
+- Alert distribution analytics
+
+---
+
+##  Futuristic UI
+Built with:
+
+- TailwindCSS
+- Framer Motion
+- Recharts
+- Animated Earth visualization
+- Glassmorphism effects
+- Neon cyber-style dashboard
+
+---
+
+##  Alert Evaluation Engine
+
+Automatically classifies events into:
 
 ###  SEVERE
-- Kp Index ≥ 7  
-- Radiation Level ≥ 8  
+- Kp Index ≥ 7
+- Radiation Level ≥ 8
 
 ###  WARNING
-- Kp Index ≥ 5  
-- Solar Wind Speed > 700 km/s  
+- Kp Index ≥ 5
+- Solar Wind Speed > 700 km/s
 
 ###  NORMAL
-- All other cases  
+- Stable space conditions
 
 ---
 
-##  External APIs Used (NOAA)
+##  NOAA API Integration
 
-- Kp Index → `planetary_k_index_1m.json`
-- Solar Wind → `plasma-1-hour.json`
-- Radiation → `xrays-6-hour.json`
+Integrated multiple real-time NOAA APIs:
 
----
-
-##  Why This Project Matters
-
-This project demonstrates:
-
-- Real-time backend system design  
-- External API integration (multi-source data aggregation)  
-- Event-driven architecture using WebSockets  
-- Clean separation of concerns  
-- Scalable and extensible backend design  
+- Kp Index API
+- Solar Wind Plasma API
+- X-Ray Radiation API
 
 ---
 
-##  Tech Stack
+##  Historical Data Tracking
 
-- **Java**
-- **Spring Boot**
-- **Spring Web**
-- **Spring Data JPA**
-- **Spring WebSocket**
-- **Hibernate**
-- **PostgreSQL**
-- **Maven**
-- **Postman**
+Stores historical records inside the database for:
+
+- Trend analysis
+- Chart visualization
+- Future ML prediction models
 
 ---
 
-##  Project Architecture
-src/main/java
-└── com.spaceweather.demo
-├── controller
-│ └── SpaceWeatherController.java
-├── service
-│ ├── WeatherService.java
-│ ├── NOAAService.java
-│ └── AlertWebSocketService.java
-├── repository
-│ └── WeatherRepository.java
-├── model
-│ └── WeatherData.java
-├── dto
-│ └── SpaceWeatherDTO.java
-├── scheduler
-│ └── WeatherScheduler.java
-└── config
-└── WebSocketConfig.java
+##  Event-Driven Architecture
 
+Backend automatically:
+
+1. Fetches live data
+2. Processes alerts
+3. Stores records
+4. Broadcasts events
+5. Updates frontend in real-time
 
 ---
 
-##  REST API Endpoints
+#  Tech Stack
 
-### ➤ Fetch & Process Data (Manual Trigger)
-**POST**
-/api/weather/fetch
+## Backend
+- Java
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Spring WebSocket
+- Hibernate
+- Maven
+
 ---
 
-### ➤ Get Latest Data
-**GET**
-/api/weather/latest
+## Frontend
+- React
+- TailwindCSS
+- Recharts
+- Framer Motion
+- React Icons
+- CountUp.js
+
 ---
 
-### ➤ Get Severe Alerts
-**GET**
-/api/weather/alerts/severe
+## Database
+- PostgreSQL / MySQL
+
 ---
 
-##  WebSocket Endpoint
+## APIs
+- NOAA Space Weather APIs
 
-### Connection Endpoint:
-/ws
+---
 
-### Subscribe to Alerts:
-/topic/alerts
+#  System Architecture
 
-### Sample Payload:
-```json
-{
-  "message": " Severe Space Weather Detected!",
-  "level": "SEVERE",
-  "kpIndex": 8.2,
-  "solarWind": 780,
-  "radiation": 9.1,
-  "time": "2026-05-05T12:30:00"
-}
-
+```text
+NOAA APIs
+     ↓
+Weather Scheduler
+     ↓
+NOAA Service Layer
+     ↓
+Alert Evaluation Engine
+     ↓
+Database Storage
+     ↓
+WebSocket Broadcasting
+     ↓
+React Dashboard (Live Updates)
 
