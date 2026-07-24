@@ -191,7 +191,8 @@ The evaluation engine immediately broadcasts severe events to all connected user
 
 <p align="center">
 
-<img src="screenshots/architecture.png" width="90%">
+<img width="1893" height="416" alt="image" src="https://github.com/user-attachments/assets/c9dbd328-142b-4037-bd45-e64230c8f3ec" />
+
 
 </p>
 
