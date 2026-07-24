@@ -13,7 +13,9 @@ public class NOAAService {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // MAIN METHOD (sab kuch yahin se aayega)
+    // ==========================
+    // MAIN METHOD
+    // ==========================
     public WeatherDTO fetchAllData() {
 
         double kp = fetchKpIndex();
@@ -23,63 +25,94 @@ public class NOAAService {
         return new WeatherDTO(kp, solarWind, radiation);
     }
 
+    // ==========================
+    // KP INDEX
+    // ==========================
     private double fetchKpIndex() {
 
-        String url = "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json";
+        try {
 
-        List<Map<String, Object>> response = restTemplate.getForObject(url, List.class);
+            String url = "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json";
 
-        if (response != null && !response.isEmpty()) {
-            Map<String, Object> latest = response.get(response.size() - 1);
-            return Double.parseDouble(latest.get("kp_index").toString());
+            List<Map<String, Object>> response
+                    = restTemplate.getForObject(url, List.class);
+
+            if (response != null && !response.isEmpty()) {
+
+                Map<String, Object> latest = response.get(response.size() - 1);
+
+                Object kp = latest.get("kp_index");
+
+                if (kp != null) {
+                    return Double.parseDouble(kp.toString());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("KP Index API failed: " + e.getMessage());
         }
 
         return 0.0;
     }
 
+    // ==========================
+    // SOLAR WIND SPEED
+    // ==========================
     private double fetchSolarWindSpeed() {
 
-        String url = "https://services.swpc.noaa.gov/products/solar-wind/plasma-6-hour.json";
+        try {
 
-        List<List<Object>> response = restTemplate.getForObject(url, List.class);
+            // Updated NOAA endpoint
+            String url = "https://services.swpc.noaa.gov/json/rtsw/rtsw_wind_1m.json";
 
-        if (response != null && response.size() > 1) {
-            List<Object> latest = response.get(response.size() - 1);
+            List<Map<String, Object>> response
+                    = restTemplate.getForObject(url, List.class);
 
-            // index 2 = speed
-            return Double.parseDouble(latest.get(2).toString());
+            if (response != null && !response.isEmpty()) {
+
+                Map<String, Object> latest = response.get(response.size() - 1);
+
+                Object speed = latest.get("proton_speed");
+
+                if (speed != null) {
+                    return Double.parseDouble(speed.toString());
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Solar Wind API failed: " + e.getMessage());
         }
 
         return 0.0;
     }
 
-    public double fetchRadiationLevel() {
+    // ==========================
+    // RADIATION LEVEL
+    // ==========================
+    private double fetchRadiationLevel() {
 
         try {
 
             String url = "https://services.swpc.noaa.gov/json/goes/primary/xrays-6-hour.json";
 
-            RestTemplate restTemplate = new RestTemplate();
+            List<Map<String, Object>> response
+                    = restTemplate.getForObject(url, List.class);
 
-            List<Map<String, Object>> response = restTemplate.getForObject(url, List.class);
+            if (response != null && !response.isEmpty()) {
 
-            if (response == null || response.isEmpty()) {
-                return 0.0;
+                Map<String, Object> latest = response.get(response.size() - 1);
+
+                Object flux = latest.get("flux");
+
+                if (flux != null) {
+                    return Double.parseDouble(flux.toString());
+                }
             }
 
-            Map<String, Object> latest = response.get(response.size() - 1);
-
-            Object flux = latest.get("flux");
-
-            return flux != null
-                    ? Double.parseDouble(flux.toString())
-                    : 0.0;
-
         } catch (Exception e) {
-
-            System.out.println("Radiation API failed.");
-
-            return 0.0;
+            System.out.println("Radiation API failed: " + e.getMessage());
         }
+
+        return 0.0;
     }
 }
