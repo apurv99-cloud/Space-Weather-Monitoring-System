@@ -3,6 +3,8 @@
 #  Space Weather Monitoring System
 
 ### Real-Time Space Weather Intelligence Platform
+<img width="1890" height="968" alt="image" src="https://github.com/user-attachments/assets/9481eb10-86e1-4ab4-ab8c-a9d5bbc236be" />
+
 
 A full-stack real-time monitoring system that continuously collects live space weather data from NOAA APIs, analyzes geomagnetic activity, stores historical records in a cloud database, and instantly broadcasts severe alerts to connected clients using WebSockets.
 
@@ -66,7 +68,10 @@ The frontend visualizes this information through a modern mission-control dashbo
 
 <p align="center">
 
-<img src="screenshots/landing-page.png" width="95%">
+<img width="1917" height="967" alt="image" src="https://github.com/user-attachments/assets/c59ca7ae-4859-4ab1-928c-c24ca1f490c9" />
+<img width="1911" height="967" alt="image" src="https://github.com/user-attachments/assets/d89dad5d-69f0-4ea7-8aa2-1d6ce3c172dd" />
+
+
 
 </p>
 
@@ -77,8 +82,12 @@ The frontend visualizes this information through a modern mission-control dashbo
 ## Mission Control Dashboard
 
 <p align="center">
+<img width="1881" height="966" alt="image" src="https://github.com/user-attachments/assets/34e9d540-8bf1-41dc-a74a-15d51cfe62c0" />
+<img width="1890" height="972" alt="image" src="https://github.com/user-attachments/assets/f9fa19cc-b2f7-4496-9dd2-1eb20a98e4e1" />
+<img width="1898" height="965" alt="image" src="https://github.com/user-attachments/assets/6371b4bd-b592-4ea6-a380-3934cf197175" />
 
-<img src="screenshots/dashboard.png" width="95%">
+
+
 
 </p>
 
@@ -732,7 +741,7 @@ Triggers immediate NOAA data retrieval.
 
 ---
 
-# 🔌 WebSocket Endpoint
+#  WebSocket Endpoint
 
 The frontend connects to
 
@@ -746,7 +755,7 @@ Whenever a severe event is detected, all connected clients instantly receive the
 
 ---
 
-# ⚡ Performance Highlights
+#  Performance Highlights
 
 - Scheduled background processing
 - Lightweight REST APIs
